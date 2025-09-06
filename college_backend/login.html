@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>College Enquiry Login</title>
+  <link rel="stylesheet" href="login.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>College Enquiry</h1>
+  </header>
+
+  <main class="login-container">
+    <div class="left-section">
+      <div class="logo-circle">
+        
+        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png" alt="Chatbot Icon" />
+      </div>
+    </div>
+
+    <div class="right-section">
+      <form id="loginForm" class="login-form">
+        <div id="errorMessage" style="color: red; margin-bottom: 10px;"></div>
+  
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required />
+        <label for="pwd">Password</label>
+        <input type="password" id="pwd" name="password" placeholder="Enter your password" required />
+        <button type="submit" class="primary-btn">Continue</button>
+
+        <p class="signup-link">
+          Don't have an account? <a href="signup.html">Sign up</a>
+        </p>
+
+        <a href="chatbots.html"><button type="button" class="social-btn">Continue as guest</button></a>
+        
+        <p style="text-align: center; margin-top: 15px;">
+          <a href="faq.html" style="color: #667eea; text-decoration: none;">View FAQ</a>
+        </p>
+      </form>
+    </div>
+
+    <script>
+      document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('pwd').value;
+        const errorDiv = document.getElementById('errorMessage');
+        
+        errorDiv.textContent = '';
+        
+        try {
+          const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email,
+              password
+            })
+          });
+          
+          const data = await response.json();
+          
+          if (response.ok) {
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
+            window.location.href = 'chatbots.html';
+          } else {
+            errorDiv.textContent = data.error || 'Login failed';
+          }
+        } catch (error) {
+          errorDiv.textContent = 'Network error. Please try again.';
+        }
+      });
+    </script>
+  </main>
+
+  <footer></footer>
+</body>
+</html>

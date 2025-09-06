@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>College Enquiry - Create Account</title>
+  <link rel="stylesheet" href="signup.css" />
+</head>
+<body>
+    <header>
+        <h1>College Enquiry</h1> 
+    </header>
+      
+  <div class="container">
+     <div class="left-section">
+    <div class="logo-circle">
+        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png" alt="Chatbot Icon" />
+    </div>
+</div>
+
+  <div class="right-section">
+    <form id="signupForm">
+        <div id="errorMessage" style="color: red; margin-bottom: 10px;"></div>
+        
+        <label>Email address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required />
+
+        <label>Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required />
+
+        <label>Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter password" required />
+
+        <label>Confirm Password</label>
+        <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm password" required />
+
+        <button type="submit">Sign Up</button>
+        
+        <p style="text-align: center; margin-top: 15px;">
+          Already have an account? <a href="login.html">Login here</a>
+        </p>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value;
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const errorDiv = document.getElementById('errorMessage');
+      
+      errorDiv.textContent = '';
+      
+      if (password !== confirmPassword) {
+        errorDiv.textContent = 'Passwords do not match';
+        return;
+      }
+      
+      try {
+        const response = await fetch('/api/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email,
+            username,
+            password
+          })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          window.location.href = 'chatbots.html';
+        } else {
+          errorDiv.textContent = data.error || 'Signup failed';
+        }
+      } catch (error) {
+        errorDiv.textContent = 'Network error. Please try again.';
+      }
+    });
+  </script>
+</body>
+</html>
