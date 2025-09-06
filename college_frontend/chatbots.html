@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>College Enquiry Chatbot</title>
+  <link rel="stylesheet" href="chatbots.css"/>
+  <script src="chatbots.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+</head>
+<body>
+<header>
+  <a href="chatbots.html"><h1>College Enquiry</h1></a>
+
+  <div class="right-section">
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <input type="text" placeholder="Search Chats…" />
+      <span class="search-icon">🔍</span>
+    </div>
+ <!-- Login Indicator -->
+    <span id="user-status" style="margin-left: 10px; font-weight:bold;"></span>
+
+    <!-- Dropdown Menu -->
+    <div class="dropdown-container">
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <div class="dropdown" id="dropdownMenu">
+        <button id="clear-chat-btn" onclick="clearChat()">Clear Chat</button>
+      </div>
+    </div>
+
+   
+  </div>
+</header>
+
+<!-- Hidden div to store login info for JS -->
+<div id="login-indicator" 
+     data-loggedin="<?php echo $userLoggedIn ? 'true' : 'false'; ?>" 
+     data-username="<?php echo $userName; ?>" 
+     style="display:none;"></div>
+
+  <main class="chat-container" id="chat-container">
+    <!-- Messages will appear here -->
+  </main>
+
+  <div class="button-bar">
+    <button onclick="showFAQs('FAQ')">FAQ</button>
+    <a href="login.html"><button>Login</button></a>
+  </div>
+
+  <footer>
+    <input type="text" id="userInput" placeholder="Send a message…" onkeydown="handleKey(event)" />
+    <span class="search-icon" onclick="sendMessage()">🔍</span>
+  </footer>
+ 
+ </body>
+</html>

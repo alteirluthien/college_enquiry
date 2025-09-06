@@ -1,0 +1,342 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body {
+    margin: 0;
+    background-color: #fcdfea;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+ header {
+  position: fixed;   /* fix at top */
+  top: 0;            /* top of page */
+  left: 0;           /* align to left */
+  width: 100%;       /* full width */
+  z-index: 1000;     /* on top of other content */
+  background-color: #5d3d9c; /* keep background */
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1.5rem;
+}
+
+/* Optional: add top padding to main content so it doesn't go under header */
+body {
+  padding-top: 60px; /* adjust based on header height */
+}
+  header h1 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+
+  a {
+  text-decoration: none;
+  color: white;
+  }
+/* Right section containing search bar and toggle menu */
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* space between search bar and menu icon */
+  position: relative; /* for dropdown absolute positioning */
+}
+
+/* Search Bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  padding: 5px 10px;
+  width: 200px; /* fixed width so it doesn't stretch */
+}
+
+/* Search Bar input */
+.search-bar input {
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  padding: 4px;
+  width: 100%; /* fill the search bar container */
+}
+  
+  .search-icon {
+    margin-left: 5px;
+    font-size: 1rem;
+  }
+  
+ .chat-container {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 20px; /* space before buttons */
+}
+  
+  .chat-message {
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .chat-message.user {
+    justify-content: flex-end;
+  }
+  
+  .chat-message.bot {
+    justify-content: flex-start;
+  }
+  
+  .message-bubble {
+    background-color: #c96ba9;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 60%;
+  }
+  
+  .bot-bubble {
+    background-color: #b1b9f5;
+    color: #333;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    margin: 0 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+  }
+  
+  .user-avatar {
+    background-color: #5d3d9c;
+    background-image: url('https://img.icons8.com/ios-filled/50/user-male-circle.png');
+  }
+  
+  .bot-avatar {
+    background-color: #5d3d9c;
+    background-image: url('https://img.icons8.com/ios-filled/50/bot.png');
+  }
+  
+.button-bar {
+  display: flex;             /* keep buttons side by side */
+  justify-content: center;   /* center horizontally */
+  align-items: center;       /* center vertically */
+  gap: 10px;                 /* space between buttons */
+  margin-bottom: 20px;       /* adds space below the button bar before footer */
+}
+
+.button-bar button,
+.button-bar a button {
+  background-color: #5d3d9c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 0;
+}
+
+
+  
+  footer {
+    background-color: #5d3d9c;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  footer input {
+    width: 70%;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+  }
+  
+  footer .search-icon {
+    color: white;
+    margin-left: 10px;
+  }
+.message {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 8px;
+  max-width: 70%;
+}
+
+
+.message.user {
+  background-color: #d1e7dd;
+  align-self: flex-end;
+  text-align: right;
+}
+
+.message.bot {
+  background-color: #f8d7da;
+  align-self: flex-start;
+}  
+
+/* FAQ Buttons */
+.faq-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.faq-button {
+  background-color: #5d3d9c;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+/* Menu Icon */
+.menu-icon {
+  font-size: 28px;
+  cursor: pointer;
+  color: white;
+  user-select: none;
+}
+
+/* Dropdown container */
+.dropdown {
+  display: none; /* hidden by default */
+  flex-direction: column;
+  position: absolute;
+  top: 40px; /* below menu icon */
+  right: 0;
+  background-color: #6a3ca1;
+  border-radius: 12px;
+  padding: 10px;
+  width: 200px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+  z-index: 999;
+}
+
+/* Show dropdown when class added */
+.dropdown.show {
+  display: flex;
+}
+
+/* Dropdown buttons */
+.dropdown button,
+.dropdown a button {
+  background-color: #b9aee5;
+  border: none;
+  padding: 12px;
+  margin: 6px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: white;
+  text-align: left;
+  width: 100%;
+  transition: background 0.3s;
+}
+
+.dropdown button:hover,
+.dropdown a button:hover {
+  background-color: #8a6ccf;
+}
+
+#user-status::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+  background-color: red; /* default not logged in */
+}
+
+#user-status.logged-in::before {
+  background-color: green;
+}
+
+/* Modal overlay */
+.modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal content (the form) */
+.modal-content {
+  background-color: #b1b9f5;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  text-align: center;
+}
+
+/* When modal opens, scale to full size */
+.modal.show .modal-content {
+  transform: scale(1);
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+}
+
+/* Form elements */
+#feedbackForm textarea,
+#feedbackForm select,
+#feedbackForm button {
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+#feedbackForm textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #5d3d9c;
+  color: white;
+  resize: vertical;
+}
+
+#feedbackForm select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #5d3d9c;
+  color: white;
+}
+
+#feedbackForm button {
+  background-color: #c96ba9;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
